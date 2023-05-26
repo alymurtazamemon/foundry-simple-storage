@@ -3,4 +3,10 @@ src = "src"
 out = "out"
 libs = ["lib"]
 
+[etherscan]
+sepolia = {key = "${ETHERSCAN_API_KEY}"}
+
+[rpc_endpoints]
+anvil = "${ANVIL_RPC_URL}"
+sepolia = "${SEPOLIA_RPC_URL}"
 # See more config options https://github.com/foundry-rs/foundry/tree/master/config
