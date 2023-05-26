@@ -9,7 +9,8 @@ contract SimpleStorageScript is Script {
     function setUp() public {}
 
     function run() public {
-        vm.broadcast();
+        uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
+        vm.startBroadcast(deployerPrivateKey);
 
         // * deploy the contract
         SimpleStorage simpleStorage = new SimpleStorage();
@@ -24,5 +25,6 @@ contract SimpleStorageScript is Script {
         // * get the updated number
         number = simpleStorage.retrieve();
         console.log("Updated Favorite Number: ", number);
+        vm.stopBroadcast();
     }
 }
