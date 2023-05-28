@@ -31,3 +31,35 @@ forge create SimpleStorage --rpc-url anvil --private-key $ANVIL_PRIVATE_KEY
 ```
 
 `Note: We only have 1 smart contract due to that we only specify the name of it (SimpleStorage) in the command but incase you have multiple contract inside the same file or in different files then you need to specify the full path of smart contract i.e in our case src/SimpleStorage.sol:SimpleStorage`
+
+### Deploy Contracts on Testnet (`Sepolia`)
+
+1. Specify the `SEPOLIA_RPC_URL`, `PRIVATE_KEY` and `ETHERSCAN_API_KEY` inside the `.env` file.
+
+```env
+SEPOLIA_RPC_URL=https://eth-sepolia.g.alchemy.com/v2/...
+PRIVATE_KEY=...
+ETHERSCAN_API_KEY=...
+```
+
+2. Add the alias for the `SEPOLIA_RPC_URL` below `[rpc_endpoints]`.
+
+```toml
+[rpc_endpoints]
+sepolia = "${SEPOLIA_RPC_URL}"
+```
+
+3. In order to verify the smart contract on etherscan you will need to add etherscan api key inside `.env` file and add this configuration inside `foundry.toml` file so the command can detect the network automatically.
+
+```toml
+[etherscan]
+sepolia = {key = "${ETHERSCAN_API_KEY}"}
+```
+
+You can read more about configurations here https://github.com/foundry-rs/foundry/tree/master/config
+
+4. Deploy the contract using command;
+
+```bash
+forge create SimpleStorage --rpc-url sepolia --private-key $PRIVATE_KEY --verify
+```
